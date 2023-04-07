@@ -12,7 +12,7 @@ services:
     ports:
       - "443:443"
     volumes:
-      - wordpress
+      - wordpress:/var/www/html/wordpress
     networks:
       - inception
     restart: always
@@ -22,13 +22,14 @@ services:
   wordpress:
     build:
       context: ./WordPress
+      dockerfile: Dockerfile
     container_name: wordpress
     depends_on:
       - mariadb
     env_file:
       - .env
     volumes:
-      - wordpress
+      - wordpress:/var/www/html/wordpress
     networks:
       - inception
     restart: always
@@ -38,13 +39,20 @@ services:
   mariadb:
     build:
       context: ./MariaDB
-  env_file:
-    - .env
-  volumes:
-    - DB
-  networks:
-    - inception
-  restart: always
+      dockerfile: Dockerfile
+      args:
+        DB_NAME: $(WP_DB_NAME)
+        DB_USER: $(WP_DB_USER)
+        DB_USER_PSWD: $(WP_DB_USER_PASSWORD)
+        DB_ROOT_PSWD: $(WP_DB_ROOT_PASSWORD)
+    container_name: mariadb
+    env_file:
+      - .env
+    volumes:
+      - mariadb:/var/lib/mysql
+    networks:
+      - inception
+    restart: always
 
 ############# NETWORK #############
 
@@ -52,3 +60,10 @@ networks:
   inception:
     driver: bridge
     name: inception
+
+############# VOLUMES #############
+
+volumes:
+  mariadb:
+  wordpress:
+  

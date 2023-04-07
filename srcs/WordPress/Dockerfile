@@ -23,5 +23,10 @@ RUN apt-get update && apt-get upgrade -y &&apt-get install -y wordpress && \
 
 #use wp command to install wordpress
 RUN wp core download --path="/var/www/html/wordpress" --allow-root && \
-    wp config create --dbname=$(DBNAME) --dbuser=$(DBUSER) --dbpass=$(DBPASS) --allow-root && \
-    wp de create
+    wp config create --path="/var/www/html/wordpress" --allow-root --dbname=$DBNAME --dbuser=$DBUSER --dbpass=$DBPASS && \
+    wp db create && \
+
+EXPOSE 9000
+
+CMD
+    
