@@ -1,0 +1,54 @@
+version: "3.3"
+
+services:
+
+############## NGINX ##############
+
+  web:
+    container_name: nginx
+    build:
+      context: ./Nginx
+      dockerfile: Dockerfile
+    ports:
+      - "443:443"
+    volumes:
+      - wordpress
+    networks:
+      - inception
+    restart: always
+
+############ WORDPRESS ############
+
+  wordpress:
+    build:
+      context: ./WordPress
+    container_name: wordpress
+    depends_on:
+      - mariadb
+    env_file:
+      - .env
+    volumes:
+      - wordpress
+    networks:
+      - inception
+    restart: always
+
+############# MARIADB #############
+
+  mariadb:
+    build:
+      context: ./MariaDB
+  env_file:
+    - .env
+  volumes:
+    - DB
+  networks:
+    - inception
+  restart: always
+
+############# NETWORK #############
+
+networks:
+  inception:
+    driver: bridge
+    name: inception
