@@ -27,7 +27,7 @@ RUN		ln -s /etc/nginx/sites-available/mgolinva.42.fr.conf /etc/nginx/sites-enabl
 
 # Copy the index.html file to the default web directory
 
-COPY index.html /var/www/html/
+# COPY index.html /var/www/html/
 
 # Expose the default HTTP port
 

@@ -40,6 +40,8 @@ RUN wp core download --path="/var/www/html/wordpress" --allow-root && \
 
 EXPOSE 9000
 
+COPY ./www.conf /etc/php/7.4/fpm/pool.d/www.conf
+
 COPY ./wp-install-script.sh ./wp-install-script.sh
 
 CMD ["bash", "./wp-install-script.sh"]
