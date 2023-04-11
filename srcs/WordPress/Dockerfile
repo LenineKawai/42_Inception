@@ -30,13 +30,9 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
     chmod +x wp-cli.phar && \
     mv wp-cli.phar /usr/local/bin/wp
 
+RUN		mkdir -p /var/www/html/wordpress
+
 #use wp command to install wordpress
-RUN wp core download --path="/var/www/html/wordpress" --allow-root && \
-    wp config create --path="/var/www/html/wordpress" --allow-root --dbname=$DB_NAME --dbuser=$DB_USER --dbpass=$DB_PASS && \
-    wp core install --path="/var/www/html/wordpress" --allow-root --url=$DOMAIN_NAME --title=$WP_SITE_TITLE --admin_user=$WP_ADMIN_USER --admin_email=$WP_ADMIN_MAIL --admin_password=$WP_ADMIN_PASSWORD && \
-    wp plugin update --allow-root --all && \
-    wp user create --path="/var/www/html/wordpress" --allow-root $WP_USER $WP_USER_EMAIL --user_pass=$WP_USER_PASSWORD && \
-    chown www-data:www-data /var/www/html/wordpress/wp-content/uploads -R
 
 EXPOSE 9000
 

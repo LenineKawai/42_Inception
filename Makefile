@@ -37,11 +37,11 @@ ps:
 # do as bash ps but with containers
 	
 images:
-	docker images
+	docker image
 # The default docker images will show all top level images, their repository and tags, and their size.
 
 volune:
-	docker volumes ls
+	docker volume ls
 # List all volumes known by docker
 
 clean:
