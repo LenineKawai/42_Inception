@@ -18,7 +18,7 @@ RUN apt-get update -y && apt-get upgrade -y && \
     mkdir -p /var/run/mysql && \
     chown -R mysql:mysql /var/run/mysql
 
-COPY ./50-server.cnf ./etc/mysql/mariadb.conf.d/50-server.cnf
+COPY ./conf/50-server.cnf ./etc/mysql/mariadb.conf.d/50-server.cnf
 
 RUN /etc/init.d/mysql start && \
     mysql -u root -e    "CREATE DATABASE IF NOT EXISTS $DB_NAME; \
@@ -26,7 +26,6 @@ RUN /etc/init.d/mysql start && \
     CREATE USER '${DB_USER}'@'%' IDENTIFIED BY '${DB_USER_PASSWORD}'; \
     GRANT ALL PRIVILEGES ON ${DB_NAME}.* TO '${DB_USER}'@'%' IDENTIFIED BY '${DB_USER_PASSWORD}'; \
     FLUSH PRIVILEGES;"
-
 
 EXPOSE 3306
 

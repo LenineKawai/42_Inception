@@ -21,7 +21,7 @@ RUN openssl req -x509 -newkey rsa:2048 -nodes -subj /C=FR -keyout /etc/ssl/mgoli
 
 # Copy the custom Nginx configuration file to the container
 
-COPY    nginx.conf /etc/nginx/sites-available/mgolinva.42.fr.conf
+COPY    ./conf/nginx.conf /etc/nginx/sites-available/mgolinva.42.fr.conf
 
 RUN		ln -s /etc/nginx/sites-available/mgolinva.42.fr.conf /etc/nginx/sites-enabled/mgolinva.42.fr.conf
 
