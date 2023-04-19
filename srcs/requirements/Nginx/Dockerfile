@@ -9,7 +9,7 @@
 FROM debian:buster
 
 RUN apt-get update && apt-get -y upgrade && \
-    apt-get install -y nginx
+    apt-get install -y nginx dumb-init
 
 RUN apt-get install -y openssl
     
@@ -34,6 +34,8 @@ RUN		ln -s /etc/nginx/sites-available/mgolinva.42.fr.conf /etc/nginx/sites-enabl
 EXPOSE 443
 
 # Start the Nginx server
+
+ENTRYPOINT [ "/usr/bin/dumb-init", "--" ]
 
 CMD ["nginx", "-g", "daemon off;"]
 

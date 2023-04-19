@@ -7,7 +7,7 @@ services:
   web:
     container_name: nginx
     build:
-      context: ./Nginx
+      context: ./requirements/Nginx
       dockerfile: Dockerfile
     image: nginx
     ports:
@@ -22,7 +22,7 @@ services:
 
   mariadb:
     build:
-      context: ./MariaDB
+      context: ./requirements/MariaDB
       dockerfile: Dockerfile
       args:
         DB_NAME: ${DB_NAME}
@@ -43,7 +43,7 @@ services:
 
   wordpress:
     build:
-      context: ./WordPress
+      context: ./requirements/WordPress
       dockerfile: Dockerfile
     container_name: wordpress
     image: wordpress

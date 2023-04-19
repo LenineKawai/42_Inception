@@ -23,7 +23,7 @@ ARG WP_USER_PASSWORD
 
 FROM debian:latest
 
-RUN apt-get update && apt-get upgrade -y && apt-get install -y wordpress php php-fpm php-mysql curl less php-mysql php-mysqli mariadb-client
+RUN apt-get update && apt-get upgrade -y && apt-get install -y wordpress php php-fpm php-mysql curl less php-mysql php-mysqli mariadb-client dumb-init
 
 #install the command handling of wordpress (wp cmd)
 
@@ -38,6 +38,8 @@ EXPOSE 9000
 COPY ./conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
 
 COPY ./wp-install-script.sh ./wp-install-script.sh
+
+ENTRYPOINT [ "/usr/bin/dumb-init", "--" ]
 
 CMD ["bash", "./wp-install-script.sh"]
 
