@@ -25,19 +25,9 @@ COPY    ./conf/nginx.conf /etc/nginx/sites-available/mgolinva.42.fr.conf
 
 RUN		ln -s /etc/nginx/sites-available/mgolinva.42.fr.conf /etc/nginx/sites-enabled/mgolinva.42.fr.conf
 
-# Copy the index.html file to the default web directory
-
-# COPY index.html /var/www/html/
-
-# Expose the default HTTP port
-
 EXPOSE 443
 
-# Start the Nginx server
 
 ENTRYPOINT [ "/usr/bin/dumb-init", "--" ]
 
 CMD ["nginx", "-g", "daemon off;"]
-
-#To lauch this container indivudualy
-# docker build -t mgolinva-nginx . && docker run --rm -d --name mgolinva-nginx -p 443:443 mgolinva-nginx

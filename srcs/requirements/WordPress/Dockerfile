@@ -6,6 +6,8 @@
 # COPY: copy elements between host and container
 # ENTRYPOINT: master process
 
+FROM debian:latest
+
 ARG DB_NAME
 ARG DB_USER
 ARG DB_USER_PASSWORD
@@ -18,10 +20,6 @@ ARG WP_ADMIN_PASSWORD
 ARG WP_USER
 ARG WP_USER_EMAIL
 ARG WP_USER_PASSWORD
-
-
-
-FROM debian:latest
 
 RUN apt-get update && apt-get upgrade -y && apt-get install -y wordpress php php-fpm php-mysql curl less php-mysql php-mysqli mariadb-client dumb-init
 
