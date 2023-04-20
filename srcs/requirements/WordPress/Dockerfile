@@ -1,29 +1,8 @@
-# FROM: from the base image
-# RUN: launches the commands (update, installation of nginx pe)
-# ENV: define env variables
-# EXPOSE: exhibits container ports
-# VOLUME: definition of volumes
-# COPY: copy elements between host and container
-# ENTRYPOINT: master process
 
 FROM debian:latest
 
-ARG DB_NAME
-ARG DB_USER
-ARG DB_USER_PASSWORD
-ARG DB_ROOT_PASSWORD
-ARG WP_DOMAIN_NAME
-ARG WP_SITE_TITLE
-ARG WP_ADMIN_USER
-ARG WP_ADMIN_MAIL
-ARG WP_ADMIN_PASSWORD
-ARG WP_USER
-ARG WP_USER_EMAIL
-ARG WP_USER_PASSWORD
-
 RUN apt-get update && apt-get upgrade -y && apt-get install -y wordpress php php-fpm php-mysql curl less php-mysql php-mysqli mariadb-client dumb-init
 
-#install the command handling of wordpress (wp cmd)
 
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
     chmod +x wp-cli.phar && \
@@ -40,6 +19,3 @@ COPY ./wp-install-script.sh ./wp-install-script.sh
 ENTRYPOINT [ "/usr/bin/dumb-init", "--" ]
 
 CMD ["bash", "./wp-install-script.sh"]
-
-# docker build -t mgolinva-wp . && docker run --env-file ../.env --rm -d --name mgolinva-wp -p 443:443 mgolinva-wp
-    

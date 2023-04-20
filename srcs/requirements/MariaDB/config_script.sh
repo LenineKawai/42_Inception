@@ -15,5 +15,4 @@ then
 	service mysql stop
 fi
 
-#start mysql server in safe mode (will restart if crash) and send data to path
 mysqld_safe --datadir=/var/lib/mysql
