@@ -12,10 +12,12 @@ RUN	mkdir -p /var/www/html/wordpress
 
 EXPOSE 9000
 
-COPY ./conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
+COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d/www.conf
 
 COPY ./wp-install-script.sh ./wp-install-script.sh
 
+RUN chmod +x wp-install-script.sh
+
 ENTRYPOINT [ "/usr/bin/dumb-init", "--" ]
 
-CMD ["bash", "./wp-install-script.sh"]
+CMD [ "sh", "./wp-install-script.sh" ]
