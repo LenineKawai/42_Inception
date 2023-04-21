@@ -1,5 +1,5 @@
 
-FROM debian:latest
+FROM debian:buster
 
 RUN apt-get update && apt-get upgrade -y && apt-get install -y wordpress php php-fpm php-mysql curl less php-mysql php-mysqli mariadb-client dumb-init
 
