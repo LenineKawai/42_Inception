@@ -1,10 +1,9 @@
 #!/bin/bash
 if [ ! -d "/var/lib/mysql/${DB_NAME}" ]
 then
-	#Create socket for mysql (to run sql)
 	service mysql start
 	sleep 3
-	#mysql -e = run command without opening mysql
+
 	mysql -e "CREATE DATABASE ${DB_NAME}" && \
 	mysql -e "CREATE USER '${DB_USER}'@'%' IDENTIFIED BY '${DB_USER_PASSWORD}';" && \
 	mysql -e "GRANT ALL PRIVILEGES ON *.* TO '${DB_USER}'@'%' IDENTIFIED BY '${DB_USER_PASSWORD}' WITH GRANT OPTION;" && \

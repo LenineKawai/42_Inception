@@ -4,7 +4,7 @@ services:
 
 ############## NGINX ##############
 
-  web:
+  nginx:
     build:
       context: ./requirements/Nginx
       dockerfile: Dockerfile
